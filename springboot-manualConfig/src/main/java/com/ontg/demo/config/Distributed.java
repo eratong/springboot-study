@@ -1,4 +1,4 @@
-package com.counect.einvoice.cubeservice.config;
+package com.ontg.demo.config;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
