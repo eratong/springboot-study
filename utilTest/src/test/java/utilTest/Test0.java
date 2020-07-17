@@ -1,5 +1,7 @@
 package utilTest;
 
+import org.junit.Test;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -9,7 +11,37 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 public class Test0 {
+//
+//        StringBuilder sb = new StringBuilder();
+//        for (List<Integer> line : imageData) {
+//            for (Integer num : line) {
+//                sb.append(num);
+//            }
+//        }
+//        System.out.println(sb.toString());
+//        //二进制转化为图片
+//        try (FileOutputStream fileOutputStream = new FileOutputStream(new File("D:\\2.jpg"));) {
+//            fileOutputStream.write(sb.toString().getBytes());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
+    @Test
+    public void mm(){
+        int[][] n=new int[3][];
+        for (int i = 0; i < 3; i++) {
+            n[i]=new int[2];
+            for (int j = 0; j < 2; j++) {
+                n[i][j]=1;
+            }
+        }
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 2; j++) {
+                System.out.println(n[i][j]);
+            }
+        }
+    }
 
 }
 class DrawRect {
