@@ -12,6 +12,8 @@
         <module>springboot-manualConfig</module>
         <module>utilTest</module>
         <module>redisTest</module>
+        <module>unifiedException</module>
+        <module>redistest</module>
     </modules>
 
 
