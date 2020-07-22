@@ -14,7 +14,7 @@
         <module>redisTest</module>
         <module>unifiedException</module>
         <module>redistest</module>
+        <module>ocr</module>
     </modules>
-
 
 </project>
