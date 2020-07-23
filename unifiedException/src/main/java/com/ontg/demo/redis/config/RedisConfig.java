@@ -22,15 +22,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.connection.RedisConfiguration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceClientConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettucePoolingClientConfiguration;
+import org.springframework.data.redis.core.BoundValueOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+
+import java.time.Duration;
 
 /**
  * https://blog.csdn.net/yangyangye/article/details/102553614
@@ -128,6 +132,10 @@ public class RedisConfig extends CachingConfigurerSupport {
         redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
         // Hash value序列化
         redisTemplate.afterPropertiesSet();
+
+//        BoundValueOperations<Object, Object> test = redisTemplate.boundValueOps("test");
+//        test.set("test");
+//        System.out.println(test.get());
         return redisTemplate;
     }
 

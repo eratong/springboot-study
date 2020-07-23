@@ -2,6 +2,7 @@ package com.ontg.demo.redis.Task;
 
 import com.ontg.demo.redis.Exception.RedisCustomExecption;
 import com.ontg.demo.redis.UnifiedMain;
+import io.lettuce.core.protocol.ConnectionWatchdog;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class RedisConnection {
     private RedisTemplate redisTemplate;
 
 
-    @Scheduled(cron = "*/5 * * * * ?")
+//    @Scheduled(cron = "*/5 * * * * ?")
     public void run() {
 
         logger.info("RedisConnection start -------");
@@ -44,5 +45,15 @@ public class RedisConnection {
     public void stop() {
 
         run.stop();
+    }
+
+    @Scheduled(cron = "*/5 * * * * ?")
+    public void s(){
+
+        try {
+            ConnectionWatchdog.run(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

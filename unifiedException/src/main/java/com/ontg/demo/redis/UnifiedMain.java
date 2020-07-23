@@ -10,6 +10,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class UnifiedMain {
     private  static ConfigurableApplicationContext run=null;
     public static void main(String[] args) {
-        run = SpringApplication.run(UnifiedMain.class);
+        SpringApplication.run(UnifiedMain.class);
     }
 }
