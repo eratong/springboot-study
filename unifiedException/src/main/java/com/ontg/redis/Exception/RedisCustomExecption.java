@@ -1,4 +1,4 @@
-package com.ontg.demo.redis.Exception;
+package com.ontg.redis.Exception;
 
 public class RedisCustomExecption extends RuntimeException{
 

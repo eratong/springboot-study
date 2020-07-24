@@ -1,4 +1,4 @@
-package com.ontg.demo.redis.config;
+package com.ontg.redis.config;
 
 import io.lettuce.core.event.EventBus;
 import io.lettuce.core.protocol.ConnectionFacade;

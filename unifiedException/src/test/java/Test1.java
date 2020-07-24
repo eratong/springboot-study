@@ -1,10 +1,13 @@
-import com.ontg.demo.redis.Exception.RedisCustomExecption;
-import com.ontg.demo.redis.UnifiedMain;
+import com.ontg.redis.Exception.RedisCustomExecption;
+import com.ontg.redis.UnifiedMain;
+import io.lettuce.core.RedisException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.core.BoundValueOperations;
+import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -36,5 +39,16 @@ public class Test1 {
             }
 
         }
+    }
+
+    @Test
+    public void s(){
+        Object result = redisTemplate.execute(new RedisCallback() {
+            @Override
+            public Object doInRedis(org.springframework.data.redis.connection.RedisConnection connection) throws DataAccessException {
+                return null;
+            }
+        });
+        new RedisException("");
     }
 }

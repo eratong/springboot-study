@@ -1,12 +1,11 @@
-package com.ontg.demo.redis.config;
+package com.ontg.redis.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ontg.demo.redis.Exception.RedisCustomExecption;
+import com.ontg.redis.Exception.RedisCustomExecption;
 import io.lettuce.core.cluster.ClusterClientOptions;
-import io.netty.channel.ChannelHandler;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +21,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.cache.RedisCacheManager;
-import org.springframework.data.redis.connection.RedisConfiguration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceClientConfiguration;
@@ -71,13 +69,13 @@ public class RedisConfig extends CachingConfigurerSupport {
     @Bean("connectionFactory")
     public LettuceConnectionFactory factory(GenericObjectPoolConfig redisPoolCustom, RedisStandaloneConfiguration redisConfigCustom) {
         ClusterClientOptions clusterClientOptions = ClusterClientOptions.builder()
-                .autoReconnect(false)//false自动重连关闭
+                .autoReconnect(true)//false自动重连关闭
                 .build();
 
         redisConfigCustom.setHostName(hostName);//默认匹配拿不到hoseName 在这里设置一下
         LettuceClientConfiguration clientConfiguration = LettucePoolingClientConfiguration.builder().poolConfig(redisPoolCustom)
+                .commandTimeout(Duration.ofSeconds(10))//todo 设置超时时间
                 .clientOptions(clusterClientOptions).build();
-
         return new LettuceConnectionFactory(redisConfigCustom, clientConfiguration);
     }
     @Bean
@@ -139,40 +137,40 @@ public class RedisConfig extends CachingConfigurerSupport {
         return redisTemplate;
     }
 
+//
+//    @Configuration
+//    @EnableCaching
+//    public class AppCacheErrorHandler implements CacheErrorHandler {
+//
+//        @Override
+//        public void handleCacheGetError(RuntimeException e, Cache cache, Object o) {
+//            System.out.println("11111111111");
+//            RedisErrorException(e, o);
+//        }
+//
+//        @Override
+//        public void handleCachePutError(RuntimeException e, Cache cache, Object o, Object o1) {
+//            System.out.println("11111111111");
+//            RedisErrorException(e, o);
+//        }
+//
+//        @Override
+//        public void handleCacheEvictError(RuntimeException e, Cache cache, Object o) {
+//            System.out.println("11111111111");
+//            RedisErrorException(e, o);
+//        }
+//
+//        @Override
+//        public void handleCacheClearError(RuntimeException e, Cache cache) {
+//            System.out.println("11111111111");
+//            RedisErrorException(e, null);
+//        }
+//    }
 
-    @Configuration
-    @EnableCaching
-    public class AppCacheErrorHandler implements CacheErrorHandler {
-
-        @Override
-        public void handleCacheGetError(RuntimeException e, Cache cache, Object o) {
-            System.out.println("11111111111");
-            RedisErrorException(e, o);
-        }
-
-        @Override
-        public void handleCachePutError(RuntimeException e, Cache cache, Object o, Object o1) {
-            System.out.println("11111111111");
-            RedisErrorException(e, o);
-        }
-
-        @Override
-        public void handleCacheEvictError(RuntimeException e, Cache cache, Object o) {
-            System.out.println("11111111111");
-            RedisErrorException(e, o);
-        }
-
-        @Override
-        public void handleCacheClearError(RuntimeException e, Cache cache) {
-            System.out.println("11111111111");
-            RedisErrorException(e, null);
-        }
-    }
-
-    @Override
-    public CacheErrorHandler errorHandler() {
-        return new RedisConfig.AppCacheErrorHandler();
-    }
+//    @Override
+//    public CacheErrorHandler errorHandler() {
+//        return new RedisConfig.AppCacheErrorHandler();
+//    }
 
     /**
        * redis数据操作异常处理 这里的处理：在日志中打印出错误信息，但是放行

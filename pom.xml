@@ -15,6 +15,7 @@
         <module>unifiedException</module>
         <module>redistest</module>
         <module>ocr</module>
+        <module>springbootjedis</module>
     </modules>
 
 </project>

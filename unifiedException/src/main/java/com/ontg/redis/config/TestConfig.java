@@ -1,6 +1,6 @@
-package com.ontg.demo.redis.config;
+package com.ontg.redis.config;
 
-import com.ontg.demo.redis.pojo.TestBean;
+import com.ontg.redis.pojo.TestBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

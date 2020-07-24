@@ -1,4 +1,4 @@
-package com.ontg.demo.redis.pojo;
+package com.ontg.redis.pojo;
 
 import javax.annotation.PreDestroy;
 

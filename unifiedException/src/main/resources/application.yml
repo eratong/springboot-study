@@ -1,6 +1,7 @@
 
 spring:
   redis:
+    timeout: 2000
     database: 0
     host: 127.0.0.1
     port: 6379
@@ -10,6 +11,6 @@ spring:
         max-active: 200
         max-idle: 10
         min-idle: 0
-        max-wait: 20000
-#        shutdown-timeout: 8
-    timeout: 60000
+        max-wait: 200
+        shutdown-timeout: 8
+
