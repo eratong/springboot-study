@@ -69,7 +69,7 @@ public class RedisConfig extends CachingConfigurerSupport {
     @Bean("connectionFactory")
     public LettuceConnectionFactory factory(GenericObjectPoolConfig redisPoolCustom, RedisStandaloneConfiguration redisConfigCustom) {
         ClusterClientOptions clusterClientOptions = ClusterClientOptions.builder()
-                .autoReconnect(true)//false自动重连关闭
+                .autoReconnect(false)//false自动重连关闭
                 .build();
 
         redisConfigCustom.setHostName(hostName);//默认匹配拿不到hoseName 在这里设置一下
