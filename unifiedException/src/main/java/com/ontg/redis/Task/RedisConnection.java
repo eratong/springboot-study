@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.concurrent.CompletableFuture;
 
-@ServiceExcepCatch
+//@ServiceExcepCatch
 @Service
 public class RedisConnection {
 
@@ -40,12 +40,10 @@ public class RedisConnection {
     @Autowired
     private RedisChannelInitializer redisChannelInitializer;
 
-    @Scheduled(cron = "*/5 * * * * ?")
+//    @Scheduled(cron = "*/5 * * * * ?")
     public void run() {
 
         logger.info("RedisConnection start -------");
-        CompletableFuture<Boolean> booleanCompletableFuture = redisChannelInitializer.channelInitialized();
-
 
 //        redisReConnectTask.testcache("r");
 //        throw new RuntimeException("ssssss");
@@ -82,19 +80,28 @@ public class RedisConnection {
         run.stop();
     }
 
-//    private volatile int attempts;
-//    @Scheduled(cron = "*/5 * * * * ?")
-//    public void s(){
-//
-//        try {
-////            ConnectionWatchdog.run(1);
-//            System.out.println(attempts);
-//
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+    @Scheduled(cron = "*/5 * * * * ?")
+    public void s(){
+
+        try {
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    redisReConnectTask.runRedisHeart();
+                }
+            }).start();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    redisReConnectTask.runRedisHeart();
+                }
+            }).start();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }

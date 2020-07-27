@@ -26,6 +26,8 @@ public class RedisReConnectTask {
     private int  attempts=0;//当前尝试次数
     private int count=10;//需要重连次数
 
+    private Timer timer=new Timer();
+
     @Cacheable(cacheNames = "test:hello")
     public String testcache(String name) {
         System.out.println("invoke...");
@@ -36,7 +38,6 @@ public class RedisReConnectTask {
     public void runRedisHeart() {
 
         synchronized (lock){
-            Timer timer = new Timer();
             TimerTask timerTask= new TimerTask() {
                 @Override
                 public  void run() {
@@ -46,12 +47,12 @@ public class RedisReConnectTask {
                                 //重连十次失败,优雅关闭程序
 //                                System.out.println(Main.SIGTERM.get());
 //                                Main.SIGTERM.set(true);
-                                Thread.sleep(10000);
+                                Thread.sleep(5000);
                                 System.exit(0);
                                 timer.cancel();
                                 break;
                             }
-                            Thread.sleep(60000);
+                            Thread.sleep(10000);
                             logger.info("runRedisHeart try "+(1+attempts)+" time-----");
                             //尝试重连
                             try {
