@@ -16,6 +16,7 @@
         <module>redistest</module>
         <module>ocr</module>
         <module>springbootjedis</module>
+        <module>codeclean</module>
     </modules>
 
 </project>
