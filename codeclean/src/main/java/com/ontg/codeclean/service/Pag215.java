@@ -4,11 +4,11 @@ package com.ontg.codeclean.service;
  * Java对象多态性实现
  * 工厂创建对象
  */
-interface Fruit{                    //定义一个水果的接口
+interface Fruit {                    //定义一个水果的接口
     public void eat();              //定义吃水果的方法
 }
 
-class Apple implements Fruit{       //定义子类Apple
+class Apple implements Fruit {       //定义子类Apple
 
     @Override//覆写eat()方法
     public void eat() {
@@ -16,7 +16,7 @@ class Apple implements Fruit{       //定义子类Apple
     }
 }
 
-class Orange implements Fruit{      //定义子类Orange
+class Orange implements Fruit {      //定义子类Orange
 
     @Override//覆写eat()方法
     public void eat() {
@@ -24,7 +24,7 @@ class Orange implements Fruit{      //定义子类Orange
     }
 }
 
-class Banana implements Fruit{      //定义子类Banana
+class Banana implements Fruit {      //定义子类Banana
 
 
     @Override//覆写eat()方法
@@ -35,16 +35,17 @@ class Banana implements Fruit{      //定义子类Banana
 
 
 //定义水果的工厂类，负责生产不同的水果类对象
-class Factory{
+class Factory {
     /**
      * 定义工厂类的获取产品对象的方法，根据用户传递的不同参数，
      * 返回不同对象
+     *
      * @param class_name
      * @return
      */
-    public static Fruit getInstance(String class_name){
+    public static Fruit getInstance(String class_name) {
         Fruit fruit = null;                 //定义接口对象，初始化为null
-        switch (class_name){
+        switch (class_name) {
             case "Apple":                   //若用户选择Apple
                 fruit = new Apple();        //根据对象的向上转型原理，将Apple实例赋值给fruit对象
                 break;

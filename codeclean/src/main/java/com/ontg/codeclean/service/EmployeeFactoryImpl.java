@@ -3,7 +3,7 @@ package com.ontg.codeclean.service;
 import com.ontg.codeclean.pojo.EmployeeRecord;
 
 public class EmployeeFactoryImpl implements EmployeeFactory {
-    public Employee makeEmployee(EmployeeRecord r){
+    public Employee makeEmployee(EmployeeRecord r) {
 //        switch (r.type) {
 //            case COMMISSIONED:
 //                return new CommissionedEmployee(r);

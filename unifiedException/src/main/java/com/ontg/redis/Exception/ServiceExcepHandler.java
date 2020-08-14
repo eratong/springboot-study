@@ -44,7 +44,7 @@ public class ServiceExcepHandler {
 //            System.out.println(JSON.toJSONString(proceedingJoinPoint.proceed()));
         } catch (Throwable throwable) {
             System.out.println(throwable instanceof QueryTimeoutException);
-            if(throwable instanceof QueryTimeoutException){
+            if (throwable instanceof QueryTimeoutException) {
                 System.out.println("QueryTimeoutException handler");
             }
         }

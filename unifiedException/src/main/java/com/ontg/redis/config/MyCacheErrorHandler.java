@@ -15,7 +15,7 @@ public class MyCacheErrorHandler {
     private static final Logger log = LoggerFactory.getLogger(MyCacheErrorHandler.class);
 
     @Bean
-    CacheInterceptor createCacheInterceptor(CacheInterceptor cacheInterceptor){
+    CacheInterceptor createCacheInterceptor(CacheInterceptor cacheInterceptor) {
         cacheInterceptor.setErrorHandler(errorHandler());
         return cacheInterceptor;
     }
@@ -28,39 +28,42 @@ public class MyCacheErrorHandler {
             public void handleCacheGetError(RuntimeException exception, Cache cache, Object key) {
                 System.out.println("errorHandler start 1----");
 
-                if(cache instanceof RedisCache){
-                    log.error("cahce get error -> "+ exception.getMessage());
-                } else{
+                if (cache instanceof RedisCache) {
+                    log.error("cahce get error -> " + exception.getMessage());
+                } else {
                     throw exception;
                 }
             }
+
             @Override
             public void handleCachePutError(RuntimeException exception, Cache cache, Object key, Object value) {
                 System.out.println("errorHandler start 2----");
 
-                if(cache instanceof RedisCache) {
+                if (cache instanceof RedisCache) {
                     log.error("cahce get Put -> " + exception.getMessage());
-                }else{
+                } else {
                     throw exception;
                 }
             }
+
             @Override
             public void handleCacheEvictError(RuntimeException exception, Cache cache, Object key) {
-                if(cache instanceof RedisCache) {
+                if (cache instanceof RedisCache) {
                     System.out.println("errorHandler start 3----");
 
-                    log.error("cahce get Evict -> "+ exception.getMessage());
-                }else{
+                    log.error("cahce get Evict -> " + exception.getMessage());
+                } else {
                     throw exception;
                 }
             }
+
             @Override
             public void handleCacheClearError(RuntimeException exception, Cache cache) {
                 System.out.println("errorHandler start 4----");
 
-                if(cache instanceof RedisCache){
-                    log.error("cahce get Clear -> "+ exception.getMessage());
-                } else{
+                if (cache instanceof RedisCache) {
+                    log.error("cahce get Clear -> " + exception.getMessage());
+                } else {
                     throw exception;
                 }
             }

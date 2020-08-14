@@ -9,17 +9,18 @@ import java.util.Random;
 
 public class Testdd {
 
-    private List<Tong> userlist=new ArrayList<>();
+    private List<Tong> userlist = new ArrayList<>();
+
     @Test
-    public void s(){
-        while (true){
+    public void s() {
+        while (true) {
             userlist.add(new Tong());
         }
     }
 }
 
-class Tong{
-      Byte[] name=new Byte[1000000000];
+class Tong {
+    Byte[] name = new Byte[1000000000];
 }
 
 /**

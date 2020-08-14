@@ -4,7 +4,7 @@ public class Test2 {
 
 
     @Test
-    public void s(){
+    public void s() {
 
     }
 }

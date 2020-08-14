@@ -45,8 +45,10 @@ public class RedisConfig extends CachingConfigurerSupport {
     private static final Logger log = LoggerFactory.getLogger(RedisConfig.class);
     @Value("${spring.redis.host}")
     private String hostName;
+
     /**
      * 配置lettuce连接池
+     *
      * @return
      */
     @Bean(name = "redisPoolCustom")
@@ -58,6 +60,7 @@ public class RedisConfig extends CachingConfigurerSupport {
 
     /**
      * 配置 redis数据源
+     *
      * @return
      */
     @Bean("redisConfigCustom")
@@ -78,6 +81,7 @@ public class RedisConfig extends CachingConfigurerSupport {
                 .clientOptions(clusterClientOptions).build();
         return new LettuceConnectionFactory(redisConfigCustom, clientConfiguration);
     }
+
     @Bean
     @Override
     public KeyGenerator keyGenerator() {
@@ -173,11 +177,11 @@ public class RedisConfig extends CachingConfigurerSupport {
 //    }
 
     /**
-       * redis数据操作异常处理 这里的处理：在日志中打印出错误信息，但是放行
-       * 保证redis服务器出现连接等问题的时候不影响程序的正常运行，使得能够出问题时不用缓存
-       *
-       * @return
-       */
+     * redis数据操作异常处理 这里的处理：在日志中打印出错误信息，但是放行
+     * 保证redis服务器出现连接等问题的时候不影响程序的正常运行，使得能够出问题时不用缓存
+     *
+     * @return
+     */
 //  @Bean
 //  @Override
 //  public CacheErrorHandler errorHandler() {
@@ -210,7 +214,6 @@ public class RedisConfig extends CachingConfigurerSupport {
 //    };
 //    return cacheErrorHandler;
 //  }
-
     protected void RedisErrorException(Exception exception, Object key) {
         log.error("redis异常：key=[{}]", key, exception);
         throw new RedisCustomExecption("success");

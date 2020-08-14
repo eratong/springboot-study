@@ -23,10 +23,10 @@ public class RedisReConnectTask {
     private RedisTemplate redisTemplate;
 
     private final Object lock = new Object();
-    private int  attempts=0;//当前尝试次数
-    private int count=10;//需要重连次数
+    private int attempts = 0;//当前尝试次数
+    private int count = 10;//需要重连次数
 
-    private Timer timer=new Timer();
+    private Timer timer = new Timer();
 
     @Cacheable(cacheNames = "test:hello")
     public String testcache(String name) {
@@ -37,13 +37,13 @@ public class RedisReConnectTask {
 
     public void runRedisHeart() {
 
-        synchronized (lock){
-            TimerTask timerTask= new TimerTask() {
+        synchronized (lock) {
+            TimerTask timerTask = new TimerTask() {
                 @Override
-                public  void run() {
+                public void run() {
                     try {
-                        for (; attempts < count+1; attempts++) {
-                            if(attempts==count){
+                        for (; attempts < count + 1; attempts++) {
+                            if (attempts == count) {
                                 //重连十次失败,优雅关闭程序
 //                                System.out.println(Main.SIGTERM.get());
 //                                Main.SIGTERM.set(true);
@@ -53,26 +53,26 @@ public class RedisReConnectTask {
                                 break;
                             }
                             Thread.sleep(10000);
-                            logger.info("runRedisHeart try "+(1+attempts)+" time-----");
+                            logger.info("runRedisHeart try " + (1 + attempts) + " time-----");
                             //尝试重连
                             try {
                                 BoundValueOperations redisHeart = redisTemplate.boundValueOps("redisHeart");
-                                redisHeart.set("redisHeart",30, TimeUnit.SECONDS);
+                                redisHeart.set("redisHeart", 30, TimeUnit.SECONDS);
                                 logger.info("redis reconnect success-----");
                                 timer.cancel();
-                                attempts=0;
+                                attempts = 0;
                                 break;//重连上了
                             } catch (Exception e) {
-                                logger.info("redis reconnect error-----"+e.getMessage());
+                                logger.info("redis reconnect error-----" + e.getMessage());
                             }
                         }
                     } catch (Exception e) {
-                        logger.info("runRedisHeart error"+e.getMessage());
+                        logger.info("runRedisHeart error" + e.getMessage());
                     }
                 }
             };
             //执行
-            timer.schedule(timerTask,0);
+            timer.schedule(timerTask, 0);
 
         }
 

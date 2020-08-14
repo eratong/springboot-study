@@ -9,15 +9,15 @@ import java.util.concurrent.TimeUnit;
 public class TimerTest {
 
     @Test
-    public void sn(){
+    public void sn() {
         Timer timer = new Timer();
-        TimerTask timerTask= new TimerTask() {
+        TimerTask timerTask = new TimerTask() {
             @Override
-            public  void run() {
+            public void run() {
                 try {
 
                     for (int i = 0; i < 10; i++) {
-                        System.out.println("runRedisHeart try "+i+" time-----");
+                        System.out.println("runRedisHeart try " + i + " time-----");
 
                         if (i > 10) {
                             //优雅关闭程序
@@ -36,17 +36,17 @@ public class TimerTest {
 //                        Thread.sleep(60000);
                     }
                 } catch (Exception e) {
-                    System.out.println("runRedisHeart error"+e.getMessage());
+                    System.out.println("runRedisHeart error" + e.getMessage());
                 }
             }
         };
         //执行
-        timer.schedule(timerTask,0);
+        timer.schedule(timerTask, 0);
     }
 
 
     @Test
-    public void xs(){
+    public void xs() {
         sn();
 //        try {
 //            sn();
@@ -57,9 +57,8 @@ public class TimerTest {
     }
 
 
-
     @Test
-    public void ssss(){
+    public void ssss() {
         System.out.println("0");
         try {
             throw new Exception("");
@@ -70,13 +69,8 @@ public class TimerTest {
     }
 
 
-
-
-
-
-
     @Test
-    public void s(){
+    public void s() {
         Timer timer = new Timer();
         System.out.println(Thread.currentThread().getName());
 
@@ -86,7 +80,7 @@ public class TimerTest {
                 System.out.println(Thread.currentThread().getName());
                 try {
                     for (int i = 0; i < 10; i++) {
-                        if(i>10){
+                        if (i > 10) {
                             timer.cancel();
                         }
                         System.out.println("执行了。。。。");
@@ -113,7 +107,7 @@ public class TimerTest {
 
                 try {
                     for (int i = 0; i < 10; i++) {
-                        if(i>10){
+                        if (i > 10) {
                             timer.cancel();
                         }
                         System.out.println("执行了。。。。");

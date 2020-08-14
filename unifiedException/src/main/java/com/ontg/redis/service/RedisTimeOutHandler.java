@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class RedisTimeOutHandler {
 
-    public void redisTimeOut(Exception e){
+    public void redisTimeOut(Exception e) {
 
-        if(e.getMessage().toLowerCase().contains("redis")){
-            if(e instanceof QueryTimeoutException){
+        if (e.getMessage().toLowerCase().contains("redis")) {
+            if (e instanceof QueryTimeoutException) {
                 System.out.println("exit");
                 System.exit(0);
             }

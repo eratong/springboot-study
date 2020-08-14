@@ -46,17 +46,18 @@ public class ModeConfig implements InitializingBean {
         System.out.println("含有分布式配置，执行分布式配置");
         log.info("External configuration exit,start distributed configuration");
     }
+
     /**
      * 外部数据库配置
      */
     @Configuration
     @MapperScan(basePackages = "com.counect.einvoice.cubeservice.mapper.cubeMapper", sqlSessionFactoryRef = "sqlSessionFactory2")
-    class DBConfig2{
+    class DBConfig2 {
         //einvoice
         @Bean(name = "dataSource2")
         public DataSource getDateSource() {
             //外部配置文件没有配einvoice吧
-            String url = "jdbc:mysql://"+distributed.loadNodeConfig.getHost()+":"+distributed.loadNodeConfig.getPort()+"/"+"einvoice"+"?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&serverTimezone=GMT%2B8";
+            String url = "jdbc:mysql://" + distributed.loadNodeConfig.getHost() + ":" + distributed.loadNodeConfig.getPort() + "/" + "einvoice" + "?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&serverTimezone=GMT%2B8";
             String username = distributed.loadNodeConfig.getUsername();
             String password = distributed.loadNodeConfig.getPassword();
             DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
@@ -72,14 +73,16 @@ public class ModeConfig implements InitializingBean {
                     new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/cubeMapper/*.xml"));
             return bean.getObject();
         }
+
         @Bean("sqlSessionTemplate2")
         public SqlSessionTemplate sqlSessionTemplate2(@Qualifier("sqlSessionFactory2") SqlSessionFactory sessionfactory) {
             return new SqlSessionTemplate(sessionfactory);
         }
     }
+
     @Configuration
     @MapperScan(basePackages = "com.counect.einvoice.cubeservice.mapper.filePaserNodeMapper", sqlSessionFactoryRef = "sqlSessionFactory3")
-    class DBConfig3{
+    class DBConfig3 {
         //filePaser四个表
         @Bean(name = "dataSource3")
         public DataSource getDateSource3() {
@@ -89,6 +92,7 @@ public class ModeConfig implements InitializingBean {
             DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
             return dataSourceBuilder.url(url).username(username).password(password).build();
         }
+
         @Bean(name = "sqlSessionFactory3")
         public SqlSessionFactory sqlSessionFactory3(@Qualifier("dataSource3") DataSource datasource)
                 throws Exception {
@@ -98,16 +102,18 @@ public class ModeConfig implements InitializingBean {
                     new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/filePaserNodeMapper/*.xml"));
             return bean.getObject();
         }
+
         @Bean("sqlSessionTemplate3")
         public SqlSessionTemplate sqlSessionTemplate3(@Qualifier("sqlSessionFactory3") SqlSessionFactory sessionfactory) {
             return new SqlSessionTemplate(sessionfactory);
         }
     }
+
     /**
      * 注册中心redis
      */
     @Configuration
-    class RedisFileConfig{
+    class RedisFileConfig {
 
         @Bean(name = "redisPoolRegister")
         public GenericObjectPoolConfig redisPoolRegister() {
@@ -118,6 +124,7 @@ public class ModeConfig implements InitializingBean {
             objectGenericObjectPoolConfig.setMaxTotal(200);
             return objectGenericObjectPoolConfig;
         }
+
         @Bean(name = "redisConfigForRegister")
         public RedisStandaloneConfiguration redisConfigForRegister() {
             RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
@@ -130,7 +137,7 @@ public class ModeConfig implements InitializingBean {
 
         @Primary
         @Bean(name = "factoryForRegister")
-        public LettuceConnectionFactory factoryForRegister(@Qualifier("redisPoolRegister") GenericObjectPoolConfig config, RedisStandaloneConfiguration redisConfigForRegister ) {
+        public LettuceConnectionFactory factoryForRegister(@Qualifier("redisPoolRegister") GenericObjectPoolConfig config, RedisStandaloneConfiguration redisConfigForRegister) {
             redisConfigForRegister.setHostName(distributed.loadNodeConfig.getRedisHost());//默认匹配拿不到hoseName 在这里设置一下
             LettuceClientConfiguration clientConfiguration = LettucePoolingClientConfiguration.builder().poolConfig(config).build();
             return new LettuceConnectionFactory(redisConfigForRegister, clientConfiguration);
@@ -158,6 +165,7 @@ public class ModeConfig implements InitializingBean {
             template.afterPropertiesSet();
             return template;
         }
+
         @Bean("stringRedisTemplateForRegister")
         public StringRedisTemplate stringRedisTemplateForRegister(@Qualifier("factoryForRegister") RedisConnectionFactory factoryForRegister) {
             return new StringRedisTemplate(factoryForRegister);

@@ -19,11 +19,12 @@ public class Test1 {
     private RedisTemplate redisTemplate;
 
     @Test
-    public void cc(){
+    public void cc() {
         BoundValueOperations test = redisTemplate.boundValueOps("test");
     }
+
     @Test
-    public void m(){
+    public void m() {
 
         try {
             BoundValueOperations test = redisTemplate.boundValueOps("test");
@@ -42,7 +43,7 @@ public class Test1 {
     }
 
     @Test
-    public void s(){
+    public void s() {
         Object result = redisTemplate.execute(new RedisCallback() {
             @Override
             public Object doInRedis(org.springframework.data.redis.connection.RedisConnection connection) throws DataAccessException {

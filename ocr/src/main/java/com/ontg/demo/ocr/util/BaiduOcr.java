@@ -69,6 +69,7 @@ public class BaiduOcr {
         }
         return null;
     }
+
     public String getAuth(String ak, String sk) {
         String accessToken = "";
 

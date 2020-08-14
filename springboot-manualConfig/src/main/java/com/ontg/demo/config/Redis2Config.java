@@ -33,6 +33,7 @@ public class Redis2Config {
 
     /**
      * 配置lettuce连接池
+     *
      * @return
      */
     @Bean(name = "redisPoolRegister")
@@ -43,6 +44,7 @@ public class Redis2Config {
 
     /**
      * 配置 redis数据源
+     *
      * @return
      */
     @Bean("redisConfigForRegister")
@@ -53,7 +55,7 @@ public class Redis2Config {
 
     @Bean("factoryForRegister")
     @Primary
-    public LettuceConnectionFactory factory(@Qualifier("redisPoolRegister") GenericObjectPoolConfig redisPoolRegister,@Qualifier("redisConfigForRegister") RedisStandaloneConfiguration redisConfigForRegister) {
+    public LettuceConnectionFactory factory(@Qualifier("redisPoolRegister") GenericObjectPoolConfig redisPoolRegister, @Qualifier("redisConfigForRegister") RedisStandaloneConfiguration redisConfigForRegister) {
         redisConfigForRegister.setHostName(hostName);//默认匹配拿不到hoseName 在这里设置一下
         LettuceClientConfiguration clientConfiguration = LettucePoolingClientConfiguration.builder().poolConfig(redisPoolRegister).build();
         return new LettuceConnectionFactory(redisConfigForRegister, clientConfiguration);
@@ -80,6 +82,7 @@ public class Redis2Config {
         template.afterPropertiesSet();
         return template;
     }
+
     @Bean("stringRedisTemplateForRegister")
     public StringRedisTemplate stringRedisTemplateForRegister(@Qualifier("factoryForRegister") RedisConnectionFactory factoryForRegister) {
         return new StringRedisTemplate(factoryForRegister);

@@ -40,7 +40,7 @@ public class RedisConnection {
     @Autowired
     private RedisChannelInitializer redisChannelInitializer;
 
-//    @Scheduled(cron = "*/5 * * * * ?")
+    //    @Scheduled(cron = "*/5 * * * * ?")
     public void run() {
 
         logger.info("RedisConnection start -------");
@@ -73,7 +73,7 @@ public class RedisConnection {
     //    public void stop(){
 //        System.exit(0);
 //    }
-    private  static ConfigurableApplicationContext run=null;
+    private static ConfigurableApplicationContext run = null;
 
     public void stop() {
 
@@ -81,7 +81,7 @@ public class RedisConnection {
     }
 
     @Scheduled(cron = "*/5 * * * * ?")
-    public void s(){
+    public void s() {
 
         try {
 

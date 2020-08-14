@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @RequestMapping("/testa")
-    public void s(){
+    public void s() {
         throw new RedisCommandTimeoutException();
     }
 }

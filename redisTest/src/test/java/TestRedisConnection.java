@@ -22,7 +22,7 @@ public class TestRedisConnection {
 //    StringRedisTemplate stringRedisTemplate;
 
     @Test
-    public void checkRedisConnectionJob(){
+    public void checkRedisConnectionJob() {
         redisService.checkConnection();
 
 //        BoundValueOperations<String, String> t = stringRedisTemplate.boundValueOps("t");

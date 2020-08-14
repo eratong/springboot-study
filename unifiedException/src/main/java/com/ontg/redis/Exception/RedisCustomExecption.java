@@ -1,6 +1,6 @@
 package com.ontg.redis.Exception;
 
-public class RedisCustomExecption extends RuntimeException{
+public class RedisCustomExecption extends RuntimeException {
 
 //    //异常错误码
 //    private int code;
@@ -17,7 +17,8 @@ public class RedisCustomExecption extends RuntimeException{
 //    }
 
     private String msg;
-    public RedisCustomExecption(String msg){
-        this.msg=msg;
+
+    public RedisCustomExecption(String msg) {
+        this.msg = msg;
     }
 }

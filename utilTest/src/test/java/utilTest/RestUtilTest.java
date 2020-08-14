@@ -13,7 +13,7 @@ public class RestUtilTest {
 
 
     @Test
-    public void m(){
+    public void m() {
 //        resp = RestUtl.doGet("http://"+node.getHost() + "/comonitor/dataCollection", seachBody, Resp.class);
         String ssssss = RestUtil.doGet("https://www.baidu.com/", "ssssss", String.class);
         System.out.println(ssssss);

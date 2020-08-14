@@ -30,6 +30,7 @@ public class RedisConfig {
 
     /**
      * 配置lettuce连接池
+     *
      * @return
      */
     @Bean(name = "redisPoolCustom")
@@ -41,6 +42,7 @@ public class RedisConfig {
 
     /**
      * 配置 redis数据源
+     *
      * @return
      */
     @Bean("redisConfigCustom")
@@ -52,12 +54,13 @@ public class RedisConfig {
     /**
      * 配置第一个数据源的连接工厂
      * 这里注意：需要添加@Primary 指定bean的名称，目的是为了创建两个不同名称的LettuceConnectionFactory
+     *
      * @param redisPoolCustom
      * @param redisConfigCustom
      * @return
      */
     @Bean("factoryLettuce")
-    public LettuceConnectionFactory factory(@Qualifier("redisPoolCustom") GenericObjectPoolConfig redisPoolCustom,@Qualifier("redisConfigCustom") RedisStandaloneConfiguration redisConfigCustom) {
+    public LettuceConnectionFactory factory(@Qualifier("redisPoolCustom") GenericObjectPoolConfig redisPoolCustom, @Qualifier("redisConfigCustom") RedisStandaloneConfiguration redisConfigCustom) {
         redisConfigCustom.setHostName(hostName);//默认匹配拿不到hoseName 在这里设置一下
         LettuceClientConfiguration clientConfiguration = LettucePoolingClientConfiguration.builder().poolConfig(redisPoolCustom).build();
         return new LettuceConnectionFactory(redisConfigCustom, clientConfiguration);
@@ -67,6 +70,7 @@ public class RedisConfig {
      * 配置第一个数据源的RedisTemplate
      * 注意：这里指定使用名称=factory 的 RedisConnectionFactory
      * 并且标识第一个数据源是默认数据源 @Primary
+     *
      * @param factory
      * @return
      */

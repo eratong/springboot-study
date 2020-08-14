@@ -8,7 +8,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @SpringBootApplication
 public class UnifiedMain {
-    private  static ConfigurableApplicationContext run=null;
+    private static ConfigurableApplicationContext run = null;
+
     public static void main(String[] args) {
         SpringApplication.run(UnifiedMain.class);
     }

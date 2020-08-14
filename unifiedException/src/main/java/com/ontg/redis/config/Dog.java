@@ -20,7 +20,7 @@ import java.net.SocketAddress;
 import java.time.Duration;
 
 @Configuration
-public class Dog  {
+public class Dog {
 
 //    @Bean
 //    public Delay reconnectDelay(){
@@ -49,14 +49,14 @@ public class Dog  {
 //    @Bean
 //    public Delay reconnectDelay(){}
 
-//    @Bean
+    //    @Bean
 //    public   ConnectionWatchdog connectionWatchdog(Delay reconnectDelay, ClientOptions clientOptions, Bootstrap bootstrap, Timer timer,
 //                                                   EventExecutorGroup reconnectWorkers, Mono< SocketAddress > socketAddressSupplier,
 //                                                   ReconnectionListener reconnectionListener, ConnectionFacade connectionFacade, EventBus eventBus){
 //        return new ConnectionWatchdog(reconnectDelay,clientOptions,bootstrap,timer,reconnectWorkers,socketAddressSupplier,reconnectionListener,connectionFacade,eventBus);
 //    }
     @Bean
-    public RedisChannelInitializer redisChannelInitializer(){
+    public RedisChannelInitializer redisChannelInitializer() {
         System.out.println("redisChannelInitializer");
         return new ConnectionBuilder().build();
     }

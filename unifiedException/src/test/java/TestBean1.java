@@ -5,7 +5,7 @@ public class TestBean1 {
 
 
     @Test
-    public void s(){
+    public void s() {
         TestBean.getTestBean("name");
     }
 

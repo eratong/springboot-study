@@ -19,7 +19,7 @@ public class RedisServiceImpl implements RedisService {
     StringRedisTemplate stringRedisTemplate;
 
     @Override
-    public Boolean checkConnection()  {
+    public Boolean checkConnection() {
         RedisConnectionFactory redisConnectionFactory = stringRedisTemplate.getConnectionFactory();
         RedisConnection redisConnection = redisConnectionFactory.getConnection();
         Boolean flag = redisConnection.isClosed();

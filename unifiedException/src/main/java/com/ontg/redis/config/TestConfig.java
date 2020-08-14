@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class TestConfig {
 
     @Bean
-    public TestBean testBean(){
+    public TestBean testBean() {
         return new TestBean();
     }
 }

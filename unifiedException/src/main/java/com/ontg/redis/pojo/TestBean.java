@@ -5,14 +5,14 @@ import javax.annotation.PreDestroy;
 public class TestBean {
 
     @PreDestroy
-    public void preDestory(){
+    public void preDestory() {
         System.out.println("TestBean destoried---------");
     }
 
 
     private String name;
 
-    public static TestBean getTestBean(String name){
+    public static TestBean getTestBean(String name) {
         TestBean testBean = new TestBean();
         testBean.setName(name);
         return testBean;

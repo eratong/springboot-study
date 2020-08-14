@@ -26,19 +26,21 @@ import java.util.List;
 public class ImageDataUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(ImageDataUtil.class);
-	
-	/**
-	 * 把图片转为opencv的Mat对象，注意图片是转为灰度图
-	 * @param filePath
-	 * @return
-	 */
-	public static Mat getOpencvMat(String filePath) {
-		Mat image = Imgcodecs.imread(filePath, Imgcodecs.CV_LOAD_IMAGE_GRAYSCALE);
-		return image;
-	}
+
+    /**
+     * 把图片转为opencv的Mat对象，注意图片是转为灰度图
+     *
+     * @param filePath
+     * @return
+     */
+    public static Mat getOpencvMat(String filePath) {
+        Mat image = Imgcodecs.imread(filePath, Imgcodecs.CV_LOAD_IMAGE_GRAYSCALE);
+        return image;
+    }
 
     /**
      * 把opencv的Mat对象转为base64的字符串
+     *
      * @param imageMat
      * @return
      */
@@ -47,8 +49,9 @@ public class ImageDataUtil {
         MatOfByte mob = new MatOfByte();
         Imgcodecs.imencode(".bmp", imageMat, mob);
         byte[] byteArray = mob.toArray();
-        return "data:image/bmp;base64,"+encoder.encodeBuffer(byteArray).trim();
+        return "data:image/bmp;base64," + encoder.encodeBuffer(byteArray).trim();
     }
+
     public static String opencvMat2Base64ForTencent(Mat imageMat) {
         byte[] data = null;
         BASE64Encoder encoder = new BASE64Encoder();
@@ -185,11 +188,12 @@ public class ImageDataUtil {
 
     /**
      * 把opencv的Mat对象转为二维List<List<Integer>>
+     *
      * @param rotate
      * @param imageMat
      * @return
      */
-    public static List<List<Integer>> opencvMat2List(String rotate, Mat imageMat){
+    public static List<List<Integer>> opencvMat2List(String rotate, Mat imageMat) {
         MatOfByte mob = new MatOfByte();
         Imgcodecs.imencode(".bmp", imageMat, mob);
         byte[] byteArray = mob.toArray();
@@ -198,7 +202,7 @@ public class ImageDataUtil {
             InputStream in = new ByteArrayInputStream(byteArray);
             bufImage = ImageIO.read(in);
         } catch (Exception e) {
-            logger.error("opencvMat2List error:",e);
+            logger.error("opencvMat2List error:", e);
         }
         ImageContent imageContent = new ImageContent();
         imageContent.setBufferedImage(bufImage);

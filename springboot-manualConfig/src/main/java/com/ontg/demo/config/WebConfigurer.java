@@ -18,10 +18,11 @@ import java.util.List;
 @ConditionalOnBean(name = "distributed")//只有分布式情况下才拦截
 public class WebConfigurer implements WebMvcConfigurer {
 
-    private static List<String> ALLOWPATHS= Arrays.asList("/css/**","/document.html","/img/**","/js/**");
+    private static List<String> ALLOWPATHS = Arrays.asList("/css/**", "/document.html", "/img/**", "/js/**");
 
     @Autowired
     private EinvoiceInterceptor einvoiceInterceptor;
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
     }

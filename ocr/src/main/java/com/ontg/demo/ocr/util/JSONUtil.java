@@ -14,22 +14,22 @@ import java.util.Map;
  * json操作工具类，基于fastjson封装
  */
 public final class JSONUtil {
-    
+
     /**
      * 默认json格式化方式
      */
     private static final SerializerFeature[] DEFAULT_FORMAT = {SerializerFeature.WriteDateUseDateFormat, SerializerFeature.WriteEnumUsingToString,
             SerializerFeature.WriteNonStringKeyAsString, SerializerFeature.QuoteFieldNames, SerializerFeature.SkipTransientField,
             SerializerFeature.SortField};
-    
+
     public static final SerializerFeature[] WRITE_NULL_VAL_FORMAT = {SerializerFeature.WriteDateUseDateFormat,
             SerializerFeature.WriteEnumUsingToString,
             SerializerFeature.WriteNonStringKeyAsString, SerializerFeature.QuoteFieldNames, SerializerFeature.SkipTransientField,
             SerializerFeature.SortField, SerializerFeature.WriteMapNullValue};
-    
+
     private JSONUtil() {
     }
-    
+
     /**
      * 从json获取指定key的字符串
      *
@@ -42,7 +42,7 @@ public final class JSONUtil {
         BeanUtil.requireNonNull(json, "json is null");
         return JSON.parseObject(json).getString(key);
     }
-    
+
     /**
      * 将字符串转换成JSON字符串
      *
@@ -56,12 +56,13 @@ public final class JSONUtil {
         return JSON.parseObject(jsonString);
     }
 
-    public static JSONObject getJSONObject(final String jsonString){
+    public static JSONObject getJSONObject(final String jsonString) {
         if (StringUtils.isEmpty(jsonString)) {
             return new JSONObject();
         }
         return JSON.parseObject(jsonString);
     }
+
     /**
      * 将json字符串，转换成指定java bean
      *
@@ -77,7 +78,7 @@ public final class JSONUtil {
         jo.put(JSON.DEFAULT_TYPE_KEY, beanClass.getName());
         return JSON.parseObject(jo.toJSONString(), beanClass);
     }
-    
+
     /**
      * @param obj 需要转换的java bean
      * @param <T> 入参对象类型泛型
@@ -87,7 +88,7 @@ public final class JSONUtil {
         BeanUtil.requireNonNull(obj, "obj is null");
         return JSON.toJSONString(obj, DEFAULT_FORMAT);
     }
-    
+
     /**
      * 通过Map生成一个json字符串
      *
@@ -97,8 +98,9 @@ public final class JSONUtil {
      */
     public static <T> String toJson(T obj, SimplePropertyPreFilter simplePropertyPreFilter) {
         BeanUtil.requireNonNull(obj, "obj is null");
-        return JSON.toJSONString(obj,simplePropertyPreFilter, DEFAULT_FORMAT);
+        return JSON.toJSONString(obj, simplePropertyPreFilter, DEFAULT_FORMAT);
     }
+
     /**
      * 通过Map生成一个json字符串
      *
@@ -108,8 +110,9 @@ public final class JSONUtil {
      */
     public static <T> String toJson(T obj, SimplePropertyPreFilter simplePropertyPreFilter, SerializerFeature[] format) {
         BeanUtil.requireNonNull(obj, "obj is null");
-        return JSON.toJSONString(obj,simplePropertyPreFilter, format);
+        return JSON.toJSONString(obj, simplePropertyPreFilter, format);
     }
+
     /**
      * 通过Map生成一个json字符串
      *
@@ -120,7 +123,7 @@ public final class JSONUtil {
         BeanUtil.requireNonNull(map, "map is null");
         return JSON.toJSONString(map, DEFAULT_FORMAT);
     }
-    
+
     /**
      * 美化传入的json,使得该json字符串容易查看
      *
@@ -131,7 +134,7 @@ public final class JSONUtil {
         BeanUtil.requireNonNull(jsonString, "jsonString is null");
         return JSON.toJSONString(getJSONFromString(jsonString), true);
     }
-    
+
     /**
      * 将传入的json字符串转换成Map
      *
@@ -143,7 +146,7 @@ public final class JSONUtil {
         return getJSONFromString(jsonString);
     }
 
-    public static JSONArray ArraytoJSONArray(String jsonString){
+    public static JSONArray ArraytoJSONArray(String jsonString) {
         BeanUtil.requireNonNull(jsonString, "jsonString is null");
         return JSON.parseArray(jsonString);
     }
@@ -158,7 +161,7 @@ public final class JSONUtil {
                                TypeReference<T> type) {
         BeanUtil.requireNonNull(jsonString, "jsonString is null");
         return JSONObject.parseObject(jsonString, type);
-        
+
     }
-    
+
 }
